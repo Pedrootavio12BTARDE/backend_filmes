@@ -1,12 +1,16 @@
-### Criar um novo filme
-POST http://localhost:3000/filmes
+
+GET http://localhost:3333/
+
+
+
+
+### Cadastrar Filme
+POST http://localhost:3333/filmes
 Content-Type: application/json
 
 {
-    "titulo": "O Senhor dos Anéis: A Irmandade do Anel",
-    "genero": "Fantasia",
-    "classificacao_indicativa": "12 anos",
-    "duracao": 178
+  "titulo": "O Senhor dos Anéis: A Irmandade do Anel",
+  "genero": "Fantasia",
+  "classificacao_indicativa": "12 anos",
+  "duracao": 178
 }
-
-
