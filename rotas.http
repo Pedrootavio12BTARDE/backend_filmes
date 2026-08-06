@@ -1,0 +1,12 @@
+### Criar um novo filme
+POST http://localhost:3000/filmes
+Content-Type: application/json
+
+{
+    "titulo": "O Senhor dos Anéis: A Irmandade do Anel",
+    "genero": "Fantasia",
+    "classificacao_indicativa": "12 anos",
+    "duracao": 178
+}
+
+
