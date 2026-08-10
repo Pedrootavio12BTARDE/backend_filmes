@@ -1,16 +1,152 @@
+### 1. Buscar todos os filmes
+GET http://localhost:3333/filmes
 
-GET http://localhost:3333/
+###
 
-
-
-
-### Cadastrar Filme
+### 2. Cadastrar um novo filme
 POST http://localhost:3333/filmes
 Content-Type: application/json
 
 {
-  "titulo": "O Senhor dos Anéis: A Irmandade do Anel",
+  "titulo": "Matrix",
+  "genero": "Ação",
+  "classificacao_indicativa": "14 anos",
+  "duracao": 136
+}
+
+
+### 1. O Rei Leão
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "O Rei Leão",
+  "genero": "Animação",
+  "classificacao_indicativa": "Livre",
+  "duracao": 88
+}
+
+### 2. Vingadores: Ultimato
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Vingadores: Ultimato",
+  "genero": "Ação",
+  "classificacao_indicativa": "12 anos",
+  "duracao": 181
+}
+
+### 3. Divertida Mente
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Divertida Mente",
+  "genero": "Animação",
+  "classificacao_indicativa": "Livre",
+  "duracao": 95
+}
+
+### 4. Motoqueiro Fantasma
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Motoqueiro Fantasma",
+  "genero": "Ação",
+  "classificacao_indicativa": "14 anos",
+  "duracao": 110
+}
+
+### 5. De Volta para o Futuro
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "De Volta para o Futuro",
+  "genero": "Ficção Científica",
+  "classificacao_indicativa": "Livre",
+  "duracao": 116
+}
+
+### 6. Homem-Aranha: No Aranhaverso
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Homem-Aranha: No Aranhaverso",
+  "genero": "Animação",
+  "classificacao_indicativa": "10 anos",
+  "duracao": 117
+}
+
+### 7. Jurassic Park
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Jurassic Park",
+  "genero": "Aventura",
+  "classificacao_indicativa": "12 anos",
+  "duracao": 127
+}
+
+### 8. Harry Potter e a Pedra Filosofal
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Harry Potter e a Pedra Filosofal",
+  "genero": "Fantasia",
+  "classificacao_indicativa": "Livre",
+  "duracao": 152
+}
+
+### 9. Interstellar
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Interstellar",
+  "genero": "Ficção Científica",
+  "classificacao_indicativa": "10 anos",
+  "duracao": 169
+}
+
+### 10. Kung Fu Panda
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Kung Fu Panda",
+  "genero": "Animação",
+  "classificacao_indicativa": "Livre",
+  "duracao": 92
+}
+
+### 11. O Senhor dos Anéis: A Sociedade do Anel
+POST http://localhost:3333/filmes
+Content-Type: application/json
+
+{
+  "titulo": "O Senhor dos Anéis: A Sociedade do Anel",
   "genero": "Fantasia",
   "classificacao_indicativa": "12 anos",
   "duracao": 178
 }
+
+###
+
+### 3. Deletar um filme pelo ID (Altere o número '1' para o ID desejado)
+DELETE http://localhost:3333/filmes/1
+
+###
+
+### 4. Buscar apenas filmes de Ação
+GET http://localhost:3333/filmes/acao
+
+###
+
+### 5. Buscar apenas filmes com classificação Livre
+GET http://localhost:3333/filmes/livre
