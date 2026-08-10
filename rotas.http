@@ -148,5 +148,17 @@ GET http://localhost:3333/filmes/acao
 
 ###
 
+
+### Editar/Atualizar um filme pelo ID (Ex: ID 1)
+PUT http://localhost:3333/filmes/1
+Content-Type: application/json
+
+{
+  "titulo": "Motoqueiro Fantasma: Espírito de Vingança",
+  "genero": "Ação / Fantasia",
+  "classificacao_indicativa": "14 anos",
+  "duracao": 95
+}
+
 ### 5. Buscar apenas filmes com classificação Livre
 GET http://localhost:3333/filmes/livre
