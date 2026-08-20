@@ -1,6 +1,6 @@
 async function buscarFilmes() {
     // Busca os filmes da rota GET local e mostra na tela
-    const resposta = await fetch("http://localhost:3333/filmes")
+    const resposta = await fetch("http://https://backend-filmes03mcpedrootavio.vercel.app/:3333/filmes")
     const filmes = await resposta.json()
     const sectionFilmes = document.querySelector(".filmes")
 

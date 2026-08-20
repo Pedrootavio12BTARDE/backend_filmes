@@ -1,5 +1,5 @@
 ### 1. Buscar todos os filmes
-GET http://localhost:3333/filmes
+GET http://https://backend-filmes03mcpedrootavio.vercel.app/:3333/filmes
 
 ###
 
