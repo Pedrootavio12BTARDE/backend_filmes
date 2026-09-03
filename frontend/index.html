@@ -2,11 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Catálogo de Filmes</title>
+  <title>Catálogo - Tabela de Filmes</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 800px; margin: 30px auto; padding: 0 20px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .btn-cadastrar { padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; text-decoration: none; font-weight: bold; }
+    .menu { display: flex; gap: 10px; margin-bottom: 25px; }
+    .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; }
+    .btn-menu { background-color: #007bff; color: white; }
+    .btn-cadastrar { background-color: #28a745; color: white; }
     .btn-deletar { background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
     table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
@@ -15,12 +17,14 @@
 </head>
 <body>
 
-  <div class="header">
-    <h1>Catálogo de Filmes</h1>
-    <a href="cadastro.html" class="btn-cadastrar">+ Cadastrar Novo Filme</a>
+  <!-- Menu de Navegação -->
+  <div class="menu">
+    <a href="index.html" class="btn btn-menu">📊 Ver Tabela de Filmes</a>
+    <a href="cadastro.html" class="btn btn-cadastrar">➕ Cadastrar Novo Filme</a>
   </div>
 
-  <!-- Tabela de exibição dos filmes -->
+  <h1>Tabela de Filmes</h1>
+
   <table>
     <thead>
       <tr>
@@ -37,7 +41,6 @@
   <script>
     const API_URL = "http://localhost:3333/filmes"
 
-    // Carrega e exibe os filmes do banco assim que entra na página
     async function carregarFilmes() {
       try {
         const response = await fetch(API_URL)
@@ -60,19 +63,17 @@
           `
         })
       } catch (error) {
-        console.error("Erro ao carregar filmes:", error)
+        console.error("Erro ao carregar os filmes:", error)
       }
     }
 
-    // Função para deletar um filme
     async function deletarFilme(id) {
-      if (confirm("Deseja realmente excluir este filme?")) {
+      if (confirm("Deseja apagar este filme?")) {
         await fetch(`${API_URL}/${id}`, { method: "DELETE" })
         carregarFilmes()
       }
     }
 
-    // Executa a busca ao abrir a página
     carregarFilmes()
   </script>
 </body>
