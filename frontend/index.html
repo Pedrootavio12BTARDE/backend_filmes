@@ -4,82 +4,75 @@
   <meta charset="UTF-8">
   <title>Catálogo de Filmes</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 30px auto; padding: 0 20px; }
-    form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
-    input, button { padding: 10px; font-size: 14px; }
-    button { cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
-    .filme-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
-    .btn-deletar { background-color: #dc3545; }
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 30px auto; padding: 0 20px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .btn-cadastrar { padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; text-decoration: none; font-weight: bold; }
+    .btn-deletar { background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+    th { background-color: #f4f4f4; }
   </style>
 </head>
 <body>
 
-  <h1>Catálogo de Filmes</h1>
+  <div class="header">
+    <h1>Catálogo de Filmes</h1>
+    <a href="cadastro.html" class="btn-cadastrar">+ Cadastrar Novo Filme</a>
+  </div>
 
-  <!-- Formulário de Cadastro -->
-  <form id="form-filme">
-    <input type="text" id="titulo" placeholder="Título do filme" required>
-    <input type="text" id="genero" placeholder="Gênero" required>
-    <input type="text" id="classificacao" placeholder="Classificação (ex: 12 anos)" required>
-    <input type="number" id="duracao" placeholder="Duração em minutos" required>
-    <button type="submit">Cadastrar Filme</button>
-  </form>
-
-  <!-- Lista onde os filmes serão exibidos -->
-  <div id="lista-filmes"></div>
+  <!-- Tabela de exibição dos filmes -->
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Gênero</th>
+        <th>Classificação</th>
+        <th>Duração</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-filmes"></tbody>
+  </table>
 
   <script>
     const API_URL = "http://localhost:3333/filmes"
 
-    // Funcao para carregar todos os filmes
+    // Carrega e exibe os filmes do banco assim que entra na página
     async function carregarFilmes() {
-      const response = await fetch(API_URL)
-      const filmes = await response.json()
-      
-      const container = document.getElementById("lista-filmes")
-      container.innerHTML = ""
+      try {
+        const response = await fetch(API_URL)
+        const filmes = await response.json()
+        
+        const tbody = document.getElementById("tabela-filmes")
+        tbody.innerHTML = ""
 
-      filmes.forEach(filme => {
-        container.innerHTML += `
-          <div class="filme-card">
-            <div>
-              <strong>${filme.titulo}</strong> (${filme.genero})<br>
-              <small>Classificação: ${filme.classificacao_indicativa} | Duração: ${filme.duracao} min</small>
-            </div>
-            <button class="btn-deletar" onclick="deletarFilme(${filme.id})">Excluir</button>
-          </div>
-        `
-      })
-    }
-
-    // Funcao para cadastrar filme via POST
-    document.getElementById("form-filme").addEventListener("submit", async (event) => {
-      event.preventDefault()
-
-      const novoFilme = {
-        titulo: document.getElementById("titulo").value,
-        genero: document.getElementById("genero").value,
-        classificacao_indicativa: document.getElementById("classificacao").value,
-        duracao: Number(document.getElementById("duracao").value)
+        filmes.forEach(filme => {
+          tbody.innerHTML += `
+            <tr>
+              <td><strong>${filme.titulo}</strong></td>
+              <td>${filme.genero}</td>
+              <td>${filme.classificacao_indicativa}</td>
+              <td>${filme.duracao} min</td>
+              <td>
+                <button class="btn-deletar" onclick="deletarFilme(${filme.id})">Excluir</button>
+              </td>
+            </tr>
+          `
+        })
+      } catch (error) {
+        console.error("Erro ao carregar filmes:", error)
       }
-
-      await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(novoFilme)
-      })
-
-      document.getElementById("form-filme").reset()
-      carregarFilmes()
-    })
-
-    // Funcao para deletar filme via DELETE
-    async function deletarFilme(id) {
-      await fetch(`${API_URL}/${id}`, { method: "DELETE" })
-      carregarFilmes()
     }
 
-    // Carrega a lista assim que abre a página
+    // Função para deletar um filme
+    async function deletarFilme(id) {
+      if (confirm("Deseja realmente excluir este filme?")) {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" })
+        carregarFilmes()
+      }
+    }
+
+    // Executa a busca ao abrir a página
     carregarFilmes()
   </script>
 </body>
