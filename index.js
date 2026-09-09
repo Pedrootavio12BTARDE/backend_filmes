@@ -14,6 +14,14 @@ app.use(cors())
     database: "alunos_filmes03MC"
 })
 
+
+
+app.get("/", (request, response) => {
+    return response.json({ message: "API de Filmes online e funcionando!" })
+})
+
+
+
  app.get("/filmes", (request, response) => {
     const selectCommand = "SELECT * FROM filmes_PedroOtavio"
 
@@ -119,3 +127,6 @@ app.put("/filmes/:id", (request, response) => {
  app.listen(3333, () => {
     console.log("Servidor online rodando em http://localhost:3333")
 })
+
+export default app
+
