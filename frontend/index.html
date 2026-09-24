@@ -5,12 +5,20 @@
   <title>Catálogo - Tabela de Filmes</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 800px; margin: 30px auto; padding: 0 20px; }
+    
+    /* Menu mantido no padrão original */
     .menu { display: flex; gap: 10px; margin-bottom: 25px; }
+    
     .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; }
     .btn-menu { background-color: #007bff; color: white; }
     .btn-cadastrar { background-color: #28a745; color: white; }
-    .btn-editar { background-color: #ffc107; color: #212529; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 5px; }
+    
+    /* Separação exclusiva para os botões de Ações na tabela */
+    .acoes { display: flex; gap: 12px; }
+    
+    .btn-editar { background-color: #ffc107; color: #212529; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     .btn-deletar { background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+    
     table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
     th { background-color: #f4f4f4; }
@@ -51,7 +59,6 @@
         tbody.innerHTML = ""
 
         filmes.forEach(filme => {
-          // Trata aspas simples nos títulos para evitar erros de sintaxe na chamada da função
           const tituloEscapado = filme.titulo.replace(/'/g, "\\'")
           const generoEscapado = filme.genero.replace(/'/g, "\\'")
 
@@ -62,8 +69,10 @@
               <td>${filme.classificacao_indicativa}</td>
               <td>${filme.duracao} min</td>
               <td>
-                <button class="btn-editar" onclick="editarFilme(${filme.id}, '${tituloEscapado}', '${generoEscapado}', '${filme.classificacao_indicativa}', ${filme.duracao})">Editar</button>
-                <button class="btn-deletar" onclick="deletarFilme(${filme.id})">Excluir</button>
+                <div class="acoes">
+                  <button class="btn-editar" onclick="editarFilme(${filme.id}, '${tituloEscapado}', '${generoEscapado}', '${filme.classificacao_indicativa}', ${filme.duracao})">Editar</button>
+                  <button class="btn-deletar" onclick="deletarFilme(${filme.id})">Excluir</button>
+                </div>
               </td>
             </tr>
           `
@@ -75,7 +84,7 @@
 
     async function editarFilme(id, tituloAtual, generoAtual, classificacaoAtual, duracaoAtual) {
       const novoTitulo = prompt("Novo título:", tituloAtual)
-      if (novoTitulo === null) return // Cancela a operação se clicar em "Cancelar"
+      if (novoTitulo === null) return
 
       const novoGenero = prompt("Novo gênero:", generoAtual)
       if (novoGenero === null) return
